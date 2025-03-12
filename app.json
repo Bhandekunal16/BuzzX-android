@@ -15,11 +15,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/favicon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rowdyhero.BuzzXandroid"
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "build": { "babel": { "include": ["@ui-kitten/components"] } }
+      "build": {
+        "babel": {
+          "include": [
+            "@ui-kitten/components"
+          ]
+        }
+      }
     },
     "plugins": [
       "expo-asset",
@@ -30,8 +37,12 @@
           "image": "./assets/favicon.png"
         }
       ],
-
       "react-native-edge-to-edge"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7bd4f2ca-c0cf-4f46-bacb-a0af6fa2d847"
+      }
+    }
   }
 }
