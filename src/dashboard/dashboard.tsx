@@ -9,19 +9,25 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 const BottomTabBar = ({ navigation, state }: { navigation: any, state: any }) => (
     <BottomNavigation
+        style={styles.tab}
         selectedIndex={state.index}
         onSelect={index => navigation.navigate(state.routeNames[index])}>
         <BottomNavigationTab title='Chats' />
-        <BottomNavigationTab title='group' />
+        <BottomNavigationTab title='Group' />
     </BottomNavigation>
 );
 
 const TabNavigator = () => (
     <Navigator tabBar={props => <BottomTabBar {...props} />}>
-        <Screen name='chat' component={Chat} />
-        <Screen name='group' component={Group} />
+        <Screen name='Chats' component={Chat} />
+        <Screen name='Group' component={Group} />
     </Navigator>
 );
 
 export default TabNavigator
 
+const styles = StyleSheet.create({
+    tab: {
+
+    }
+});
