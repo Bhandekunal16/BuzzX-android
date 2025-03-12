@@ -1,30 +1,18 @@
-import { Assets as NavigationAssets } from '@react-navigation/elements';
-import { Asset } from 'expo-asset';
-import * as SplashScreen from 'expo-splash-screen';
-import * as React from 'react';
-import { Navigation } from './navigation';
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import { RootStack } from "./navigation";
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
 
-Asset.loadAsync([
-  ...NavigationAssets,
-  require('./assets/newspaper.png'),
-  require('./assets/bell.png'),
-]);
-
-SplashScreen.preventAutoHideAsync();
-
-export function App() {
+export default function App() {
   return (
-    <Navigation
-      linking={{
-        enabled: 'auto',
-        prefixes: [
-          // Change the scheme to match your app's scheme defined in app.json
-          'helloworld://',
-        ],
-      }}
-      onReady={() => {
-        SplashScreen.hideAsync();
-      }}
-    />
+    <>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+      </ApplicationProvider>
+    </>
+
   );
 }
