@@ -21,11 +21,11 @@ const Chat = () => {
                     <Layout key={index} style={styles.item} level='1'>
                         <Text style={{
                             backgroundColor: getRandomHexColor(),
-                            color: '#000',
+                            color: '#fff',
                             fontSize: 24,
                             height: 40,
                             width: 40,
-                            borderColor: '#000',
+                            borderColor: '#fff',
                             borderWidth: 1,
                             borderRadius: 100,
                             textAlign: 'center'
@@ -61,19 +61,12 @@ const Chat = () => {
     };
 
     const getAllGroupsProcess = async () => {
-        console.log('0')
         setLoading(false)
-        console.log('1', loading)
         const id = await AsyncStorage.getItem('id')
         const user = await AsyncStorage.getItem('user')
-        console.log('2', id)
         await axios.get(`${env.environment}/auth/getall/group/${id}`).then(async (res) => {
-            console.log('3', res)
             let data = await ACS.decrypt(res.data.response)
-            console.log('4', data)
-            console.log('5', typeof data)
             let arr: any = data.data
-            console.log('6', arr)
             for (let i of arr) {
                 i.groupName.split('|').map((element: string | any) => {
                     if (element != user) {
@@ -83,12 +76,11 @@ const Chat = () => {
                 i.icon = i.groupName.split('')[0];
             }
             setGroup(arr)
-            console.log('7', arr[0]._id)
         })
     }
 
     return (
-        <Layout level='4' style={{ height: '100%' }}>
+        <Layout level='2' style={{ height: '100%' }}>
             {!loading && group.length != 0
                 ? <Layout level='3' style={styles.container}><Groups group={group} /></Layout>
                 : <Layout level='3' style={styles.container}><Groups group={group} /></Layout>}
