@@ -5,20 +5,27 @@ import React from 'react'
 import { ToastAndroid, StyleSheet } from 'react-native'
 import { environment } from '../env/environment'
 import { decryption } from '../service/decryption'
+import { NavigationProp } from '@react-navigation/native'
 
-const Chat = () => {
+const Chat = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const env = new environment()
     const ACS = new decryption()
 
     const [loading, setLoading] = React.useState(true)
     const [group, setGroup]: any = React.useState([])
 
+    const onClickChat = async (data: any) => {
+        const GroupData = JSON.stringify(data)
+        await AsyncStorage.setItem('group', GroupData)
+        navigation.navigate('ChatScreen')
+    }
+
 
     const Groups = ({ group }: { group: any[] }) => {
         return (
             <Layout style={styles.container} level='2'>
                 {group.map((item, index) => (
-                    <Layout key={index} style={styles.item} level='1'>
+                    <Layout key={index} style={styles.item} level='1' >
                         <Text style={{
                             backgroundColor: getRandomHexColor(),
                             color: '#fff',
@@ -30,7 +37,7 @@ const Chat = () => {
                             borderRadius: 100,
                             textAlign: 'center'
                         }}>{item.icon}</Text>
-                        <Text style={styles.title}> {item.groupName}</Text>
+                        <Text style={styles.title} onPress={() => onClickChat(item)}> {item.groupName}</Text>
                     </Layout>
                 ))}
             </Layout>
@@ -49,11 +56,6 @@ const Chat = () => {
     const welcome = async () => {
         const user = await AsyncStorage.getItem('user')
         showToast(`Hello ${user} welcome to BuzzX` || '')
-    }
-
-    const Logout = async () => {
-        await AsyncStorage.clear()
-        // router.navigate("/login")
     }
 
     const showToast = (data: string) => {

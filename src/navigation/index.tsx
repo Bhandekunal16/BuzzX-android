@@ -24,9 +24,7 @@ export function RootStack() {
       <Stack.Screen name="Dashboard" component={TabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="ChatScreen" component={ChatScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
     </Stack.Navigator>
   );
 }
