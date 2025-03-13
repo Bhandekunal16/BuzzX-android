@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../auth/login';
 import ForgetPassword from '../auth/forget-password';
 import Register from '../auth/register';
-
 import TabNavigator from '../dashboard/dashboard';
+import ChatScreen from '../dashboard/group';
 
 const Stack = createNativeStackNavigator<any>();
 
@@ -22,6 +22,9 @@ export function RootStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Dashboard" component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="ChatScreen" component={ChatScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
