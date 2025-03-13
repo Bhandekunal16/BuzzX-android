@@ -29,9 +29,9 @@ const ChatScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const { getServerSentEvent, close } = useEventService(`${env.environment}/event/stream`);
 
     const jsonBuilder = (data: any) => {
-        console.log(data)
         try {
-            return JSON.parse(data);
+            if (typeof data == 'string') { return data }
+            else return JSON.parse(data);
         } catch {
             console.error('Invalid JSON');
             return {};
